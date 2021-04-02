@@ -7,23 +7,21 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 struct PokeAPIService {
     
-// MARK: - Singleton
+    // MARK: - Singleton
     static let shared = PokeAPIService()
     
-// MARK: - URL
+    // MARK: - URL
     private var baseURL = "https://pokeapi.co/api/v2/pokemon"
     
-// MARK: - Services
+    // MARK: - Services
     func requestFetchPokemonList(completion: @escaping (Pokemon?, Error?) -> ()){
         AF.request(baseURL)
             .validate()
             .responseDecodable(of: Pokemon.self) { (response) in
-                //                guard let pokemon = response.value else { return }
-                //                self.fetchData(for: pokemon.all)
-                
                 if let error = response.error {
                     completion(nil, error)
                     return
@@ -66,6 +64,17 @@ struct PokeAPIService {
         }
     }
     
-    
+    func downloadImage(url: String, completion: @escaping (Image?) -> (Void)){
+        AF.request(url, method: .get).responseImage { (response) in
+            switch response.result {
+            case .success(let value):
+                completion(value)
+            case .failure:
+                completion(nil)
+            }
+        }
+        
+        
+    }
     
 }

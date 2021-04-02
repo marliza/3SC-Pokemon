@@ -6,12 +6,9 @@
 //
 
 import UIKit
-import Alamofire
-import AlamofireImage
 
 class HomeViewController: UICollectionViewController {
     
-//    var pokemons: [PokemonData]?
     var pokemonStatsArray: [PokemonStats]?
     
     override func viewDidLoad() {
@@ -33,19 +30,17 @@ extension HomeViewController{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokemonCell", for: indexPath) as! PokemonCollectionCell
         if let poke = pokemonStatsArray?[indexPath.item]{
             cell.name = poke.name
-        
+            
             // fetch the sprite for the pokemon and set imageView
-            AF.request(poke.sprites.frontImage).responseImage { response in
-                if case .success(let image) = response.result {
-                    cell.image = image
-                }
+            self.download(imageURl: poke.sprites.frontImage) { (image) -> (Void) in
+                cell.image = image
             }
         }
         return cell
     }
 }
 
-//MARK: -
+//MARK: - PokeAPIService 
 
 extension HomeViewController{
     func fetchPokemonList() {
@@ -70,5 +65,9 @@ extension HomeViewController{
                 }
             }
         }
+    }
+    
+    func download(imageURl url: String, completion:  @escaping (UIImage?) -> (Void)){
+        PokeAPIService.shared.downloadImage(url: url, completion: completion)
     }
 }
