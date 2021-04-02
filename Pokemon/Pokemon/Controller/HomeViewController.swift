@@ -6,15 +6,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeViewController: UICollectionViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        fetchPokemonList()
     }
-
-
+    
+    
 }
 //MARK: - UICollectionViewDataSource
 
@@ -28,5 +30,18 @@ extension HomeViewController{
         cell.name = "Pickachu"
         
         return cell
+    }
+}
+
+//MARK: -
+
+extension HomeViewController{
+    func fetchPokemonList(){
+        // 1
+        let request = AF.request("https://pokeapi.co/api/v2/pokemon")
+        // 2
+        request.responseJSON { (data) in
+            print(data)
+        }
     }
 }
