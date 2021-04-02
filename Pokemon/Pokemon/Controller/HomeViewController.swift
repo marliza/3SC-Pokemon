@@ -13,7 +13,7 @@ class HomeViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Pokemon"
         fetchPokemonList()
     }
     
