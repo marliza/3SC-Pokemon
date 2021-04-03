@@ -14,7 +14,7 @@ class HomeViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Pokemon"
+        self.title = K.navTitle
         fetchPokemonList()
     }
     
@@ -38,7 +38,7 @@ extension HomeViewController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokemonCell", for: indexPath) as! PokemonCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.pokemonCellIdentifier, for: indexPath) as! PokemonCollectionCell
         if let poke = pokemonStatsArray?[indexPath.item]{
             cell.name = poke.name
             
@@ -58,7 +58,7 @@ extension HomeViewController{
         let cell = collectionView.cellForItem(at: indexPath) as! PokemonCollectionCell
 
         pokemonImage = cell.image
-        performSegue(withIdentifier: "StatsViewSegue", sender: self)
+        performSegue(withIdentifier: K.statsViewSegue, sender: self)
     }
 }
 
