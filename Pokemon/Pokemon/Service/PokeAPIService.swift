@@ -18,7 +18,7 @@ struct PokeAPIService {
     private var baseURL = "https://pokeapi.co/api/v2/pokemon"
     
     // MARK: - Services
-    func requestFetchPokemonList(completion: @escaping (Pokemon?, Error?) -> ()){
+    func requestFetchPokemonList(completion: @escaping ([PokemonStats]?, Error?) -> ()){
         AF.request(baseURL)
             .validate()
             .responseDecodable(of: Pokemon.self) { (response) in
@@ -27,7 +27,16 @@ struct PokeAPIService {
                     return
                 }
                 if let pokemon = response.value {
-                    completion(pokemon, nil)
+                    // fetch the pokemon details using the url endpoint
+                    PokeAPIService.shared.fetchData(for: pokemon.all) { (pokeStats, error) in
+                        if let error = error{
+                            print("error: \(error.localizedDescription)")
+                            return
+                        }
+                        if let pokeStats = pokeStats{
+                            completion(pokeStats, nil)
+                        }
+                    }
                     return
                 }
             }

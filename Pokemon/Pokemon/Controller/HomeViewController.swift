@@ -67,24 +67,15 @@ extension HomeViewController{
 extension HomeViewController{
     func fetchPokemonList() {
         // fetch list of pokemon (results array)
-        PokeAPIService.shared.requestFetchPokemonList { (pokemon, error) in
+        PokeAPIService.shared.requestFetchPokemonList { (pokeStats, error) in
             if let error = error{
                 print("error: \(error.localizedDescription)")
                 return
             }
-            guard let pokemon = pokemon?.all else{
-                return
-            }
-            // fetch the pokemon details using the url endpoint
-            PokeAPIService.shared.fetchData(for: pokemon) { (pokeStats, error) in
-                if let error = error{
-                    print("error: \(error.localizedDescription)")
-                    return
-                }
-                if let pokeStats = pokeStats{
-                    self.pokemonStatsArray = pokeStats
-                    self.collectionView.reloadData()
-                }
+          
+            if let pokeStats = pokeStats{
+                self.pokemonStatsArray = pokeStats
+                self.collectionView.reloadData()
             }
         }
     }
