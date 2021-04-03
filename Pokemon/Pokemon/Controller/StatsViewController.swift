@@ -9,11 +9,21 @@ import UIKit
 
 class StatsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var dataCardView: UIView!
     
     var pokemonStatData: PokemonStats? = nil
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set rounded corner for imageview
+        imageView.layer.cornerRadius = 15.0
+        imageView.layer.masksToBounds = true
+        
+        // set rounded corner for data imageview
+        dataCardView.layer.cornerRadius = 15.0
+        dataCardView.layer.masksToBounds = true
 
         if let stat = pokemonStatData{
             // fetch the sprite for the pokemon and set imageView
@@ -23,6 +33,11 @@ class StatsViewController: UIViewController {
         }
 
     }
+    
+    @IBAction func closeDetailView(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
 }
 
