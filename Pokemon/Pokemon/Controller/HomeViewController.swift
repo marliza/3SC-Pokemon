@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UICollectionViewController {
     
     var pokemonStatsArray: [PokemonStats]?
+    var pokemonImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,16 @@ class HomeViewController: UICollectionViewController {
         fetchPokemonList()
     }
     
+    //MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! StatsViewController
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first{
+            destinationVC.pokemonStatData = pokemonStatsArray?[indexPath.item]
+        }
+
+    }
+
     
 }
 //MARK: - UICollectionViewDataSource
@@ -37,6 +48,17 @@ extension HomeViewController{
             }
         }
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension HomeViewController{
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PokemonCollectionCell
+
+        pokemonImage = cell.image
+        performSegue(withIdentifier: "StatsViewSegue", sender: self)
     }
 }
 
@@ -71,3 +93,6 @@ extension HomeViewController{
         PokeAPIService.shared.downloadImage(url: url, completion: completion)
     }
 }
+
+
+

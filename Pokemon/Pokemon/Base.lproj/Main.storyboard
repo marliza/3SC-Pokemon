@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,10 +69,65 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="I9f-I9-Bjv"/>
+                    <connections>
+                        <segue destination="2SR-zR-159" kind="presentation" identifier="StatsViewSegue" id="l5W-0I-Lyr"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0o-hD-wGQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="783" y="84"/>
+        </scene>
+        <!--Stats View Controller-->
+        <scene sceneID="DX2-0T-0Gp">
+            <objects>
+                <viewController id="2SR-zR-159" customClass="StatsViewController" customModule="Pokemon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ETQ-wW-e7A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MFV-Oo-fJU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IgH-Rp-Nx7">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="400" id="a0j-H4-Nnh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNd-m8-45R">
+                                        <rect key="frame" x="0.0" y="400" width="414" height="442"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="WNd-m8-45R" secondAttribute="trailing" id="6av-Du-bql"/>
+                                    <constraint firstItem="IgH-Rp-Nx7" firstAttribute="leading" secondItem="MFV-Oo-fJU" secondAttribute="leading" id="9uI-z4-oOg"/>
+                                    <constraint firstItem="WNd-m8-45R" firstAttribute="top" secondItem="IgH-Rp-Nx7" secondAttribute="bottom" id="Gbv-Uu-56Z"/>
+                                    <constraint firstItem="WNd-m8-45R" firstAttribute="leading" secondItem="MFV-Oo-fJU" secondAttribute="leading" id="a5Y-k3-Sag"/>
+                                    <constraint firstAttribute="bottom" secondItem="WNd-m8-45R" secondAttribute="bottom" id="fAX-ZA-kTJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="IgH-Rp-Nx7" secondAttribute="trailing" id="rjy-gs-HHv"/>
+                                    <constraint firstItem="IgH-Rp-Nx7" firstAttribute="top" secondItem="MFV-Oo-fJU" secondAttribute="top" id="u7p-sc-T1A"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jWc-gA-xVP"/>
+                        <color key="backgroundColor" red="0.091295145452022552" green="0.67115861177444458" blue="0.70453131198883057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MFV-Oo-fJU" firstAttribute="trailing" secondItem="jWc-gA-xVP" secondAttribute="trailing" id="K0C-Va-g2h"/>
+                            <constraint firstItem="MFV-Oo-fJU" firstAttribute="centerX" secondItem="ETQ-wW-e7A" secondAttribute="centerX" id="L5e-Ru-Vug"/>
+                            <constraint firstItem="MFV-Oo-fJU" firstAttribute="centerY" secondItem="ETQ-wW-e7A" secondAttribute="centerY" id="lZg-sJ-tMp"/>
+                            <constraint firstItem="MFV-Oo-fJU" firstAttribute="top" secondItem="jWc-gA-xVP" secondAttribute="top" id="yJr-qh-RA5"/>
+                            <constraint firstAttribute="bottom" secondItem="MFV-Oo-fJU" secondAttribute="bottom" id="ycN-8t-yQe"/>
+                            <constraint firstItem="MFV-Oo-fJU" firstAttribute="leading" secondItem="jWc-gA-xVP" secondAttribute="leading" id="zit-lb-bYq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="IgH-Rp-Nx7" id="lIH-ci-KoW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wYA-In-MgP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1763.7681159420292" y="83.705357142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WrG-4a-cYV">
