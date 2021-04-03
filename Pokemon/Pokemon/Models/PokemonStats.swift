@@ -10,8 +10,24 @@ import Foundation
 struct PokemonStats: Decodable {
     let id: Int
     let name: String
+    let height: Int
+    let weight: Int
+    let species: Species
     let sprites: Sprites
+    let types: [Type]
     let stats:[Statistics]
+}
+
+struct Type: Decodable{
+    let type: TypeData
+}
+
+struct TypeData: Decodable {
+    let name: String
+}
+    
+struct Species: Decodable{
+    let name: String
 }
 
 struct Sprites: Decodable{
