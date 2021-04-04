@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Pokemon-->
         <scene sceneID="i9s-VB-vfC">
             <objects>
                 <collectionViewController id="hb2-aC-CDq" customClass="HomeViewController" customModule="Pokemon" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,7 +86,7 @@
                             <outlet property="delegate" destination="hb2-aC-CDq" id="fwT-OJ-9mp"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="I9f-I9-Bjv"/>
+                    <navigationItem key="navigationItem" title="Pokemon" id="I9f-I9-Bjv"/>
                     <connections>
                         <segue destination="2SR-zR-159" kind="presentation" identifier="StatsViewSegue" modalPresentationStyle="fullScreen" id="l5W-0I-Lyr"/>
                     </connections>

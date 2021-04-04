@@ -10,8 +10,6 @@ import UIKit
 class StatsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dataCardView: UIView!
-    @IBOutlet weak var baseStatsView: UIView!
-    
     @IBOutlet weak var heightValueLabel: UILabel!
     @IBOutlet weak var weightValueLabel: UILabel!
     @IBOutlet weak var typeValueLabel: UILabel!
@@ -19,7 +17,6 @@ class StatsViewController: UIViewController {
     
     var pokemonStatData: PokemonStats? = nil
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +29,7 @@ class StatsViewController: UIViewController {
         dataCardView.layer.masksToBounds = true
 
         // populate data fetched from api in view 
-       setStatsData()
+        setStatsData()
 
     }
     
@@ -58,12 +55,10 @@ class StatsViewController: UIViewController {
             let joinedTyped = typeList.joined(separator: ", ")
             
             typeValueLabel.text = joinedTyped
-            
             speciesValueLabel.text = String(stat.species.name)
             
         }
     }
-    
 }
 
 //MARK: - PokeAPIService

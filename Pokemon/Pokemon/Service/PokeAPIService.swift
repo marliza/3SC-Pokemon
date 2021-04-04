@@ -15,11 +15,14 @@ struct PokeAPIService {
     static let shared = PokeAPIService()
     
     // MARK: - URL
-    private var baseURL = "https://pokeapi.co/api/v2/pokemon"
+    private var baseURL = "https://pokeapi.co/api/v2"
+    private var endpointGetAllPokemon = "/pokemon"
     
     // MARK: - Services
     func requestFetchPokemonList(completion: @escaping ([PokemonStats]?, Error?) -> ()){
-        AF.request(baseURL)
+        let url = baseURL + endpointGetAllPokemon
+        
+        AF.request(url)
             .validate()
             .responseDecodable(of: Pokemon.self) { (response) in
                 if let error = response.error {
@@ -40,21 +43,6 @@ struct PokeAPIService {
                     return
                 }
             }
-    }
-    
-    func requestFetchPokemon(with parameter:String, completion: @escaping (PokemonStats?, Error?) -> ()){
-       
-        let searchURL = baseURL + "/" + parameter
-        
-        AF.request(searchURL).validate().responseDecodable(of: PokemonStats.self) { (response) in
-            if let error = response.error {
-                completion(nil, error)
-                return
-            }
-            if let value = response.value {
-               completion(value, nil)
-            }
-        }
     }
     
     func fetchData(for list: [PokemonData], completion: @escaping([PokemonStats]?, Error?) -> ()) {
@@ -94,12 +82,10 @@ struct PokeAPIService {
             case .success(let value):
                 completion(value)
             case .failure:
-                let defaultImage = UIImage(named: "pokeball")
+                let defaultImage = UIImage(named: K.placeholderImageName)
                 completion(defaultImage)
             }
         }
-        
-        
     }
     
 }

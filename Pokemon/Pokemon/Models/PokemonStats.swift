@@ -59,7 +59,6 @@ struct Artwork: Decodable{
     }
 }
 
-
 struct Statistics: Decodable {
     let baseStat: Int
     let effort: Int

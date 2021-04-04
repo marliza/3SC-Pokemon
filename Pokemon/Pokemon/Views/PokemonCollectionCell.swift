@@ -18,7 +18,6 @@ class PokemonCollectionCell: UICollectionViewCell {
             // set rounded corner for imageview
             imageView.layer.cornerRadius = 15.0
             imageView.layer.masksToBounds = true
-
         }
     }
     
@@ -29,10 +28,9 @@ class PokemonCollectionCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-            // set rounded corner for cell section
-            self.layer.cornerRadius = 15.0
-            self.layer.masksToBounds = true
-            
-        }
+        // set rounded corner for cell section
+        self.layer.cornerRadius = 15.0
+        self.layer.masksToBounds = true
+    }
     
 }
