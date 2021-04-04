@@ -9,8 +9,14 @@ import UIKit
 
 class HomeViewController: UICollectionViewController {
     
-    var pokemonStatsArray: [PokemonStats]?
+    var pokemonStatsArray: [PokemonStats]?{
+        didSet{
+            self.collectionPokemonList = pokemonStatsArray
+        }
+    }
     var pokemonImage: UIImage?
+    
+    var collectionPokemonList: [PokemonStats]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +30,7 @@ class HomeViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! StatsViewController
         if let indexPath = collectionView.indexPathsForSelectedItems?.first{
-            destinationVC.pokemonStatData = pokemonStatsArray?[indexPath.item]
+            destinationVC.pokemonStatData = collectionPokemonList?[indexPath.item]
         }
 
     }
@@ -35,12 +41,12 @@ class HomeViewController: UICollectionViewController {
 
 extension HomeViewController{
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.pokemonStatsArray?.count ?? 0
+        return self.collectionPokemonList?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.pokemonCellIdentifier, for: indexPath) as! PokemonCollectionCell
-        if let poke = pokemonStatsArray?[indexPath.item]{
+        if let poke = collectionPokemonList?[indexPath.item]{
             cell.name = poke.name
             
             // fetch the sprite for the pokemon and set imageView
@@ -73,14 +79,19 @@ extension HomeViewController{
 extension HomeViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text?.lowercased(){
-            searchPokemon(with: searchText)
+        if let searchText = searchBar.text?.lowercased(), searchBar.text != ""{
+            if let filteredArray = self.pokemonStatsArray?.filter({$0.name.contains(searchText)}){
+                self.collectionPokemonList = filteredArray
+                self.collectionView.reloadData()
+            }
+
         }
     }
    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count == 0{
-            fetchPokemonList()
+            self.collectionPokemonList = self.pokemonStatsArray
+            self.collectionView.reloadData()
 
         }
     }
