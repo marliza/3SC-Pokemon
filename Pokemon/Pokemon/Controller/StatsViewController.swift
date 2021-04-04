@@ -37,8 +37,8 @@ class StatsViewController: UIViewController {
     func setStatsData(){
         if let stat = pokemonStatData{
             // fetch the sprite for the pokemon and set imageView
-            self.downloadPokemonImage(with: stat.sprites.mainImage.image) { (image) -> (Void) in
-                self.imageView.image = image
+            self.downloadPokemonImage(with: stat.sprites.mainImage.image) {[weak self] (image) -> (Void) in
+                self?.imageView.image = image
             }
             
             heightValueLabel.text = String(Double(stat.height) / 10) + " m" // convert decimeter to meters

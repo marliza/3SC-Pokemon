@@ -45,7 +45,7 @@ extension HomeViewController{
             cell.name = poke.name
             
             // fetch the sprite for the pokemon and set imageView
-            self.download(imageURl: poke.sprites.frontImage) { (image) -> (Void) in
+            self.download(imageURl: poke.sprites.frontImage) {[cell] (image) -> (Void) in
                 cell.image = image
             }
         }
@@ -101,15 +101,15 @@ extension HomeViewController: UISearchBarDelegate{
 extension HomeViewController{
     func fetchPokemonList() {
         // fetch list of pokemon (results array)
-        PokeAPIService.shared.requestFetchPokemonList { (pokeStats, error) in
+        PokeAPIService.shared.requestFetchPokemonList {[weak self] (pokeStats, error) in
             if let error = error{
                 print("error: \(error.localizedDescription)")
                 return
             }
           
             if let pokeStats = pokeStats{
-                self.pokemonStatsArray = pokeStats
-                self.collectionView.reloadData()
+                self?.pokemonStatsArray = pokeStats
+                self?.collectionView.reloadData()
             }
         }
     }
