@@ -73,6 +73,12 @@ extension HomeViewController{
             
         return searchView
     }
+    
+    //MARK: - Scroll
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+
 }
 
 //MARK: - SearchBarDelegate
