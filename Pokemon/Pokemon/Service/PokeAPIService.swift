@@ -16,7 +16,7 @@ struct PokeAPIService {
     
     // MARK: - URL
     private var baseURL = "https://pokeapi.co/api/v2"
-    private var endpointGetAllPokemon = "/pokemon"
+    private var endpointGetAllPokemon = "/pokemon?limit=50" // fixing the limit to 50 
     
     // MARK: - Services
     func requestFetchPokemonList(completion: @escaping ([PokemonStats]?, Error?) -> ()){

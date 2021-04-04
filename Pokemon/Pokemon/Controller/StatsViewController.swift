@@ -19,6 +19,7 @@ class StatsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = pokemonStatData?.name.capitalized
         
         // set rounded corner for imageview
         imageView.layer.cornerRadius = 15.0
@@ -31,10 +32,6 @@ class StatsViewController: UIViewController {
         // populate data fetched from api in view 
         setStatsData()
 
-    }
-    
-    @IBAction func closeDetailView(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func setStatsData(){
