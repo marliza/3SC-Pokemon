@@ -20,13 +20,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="10" id="tPN-fT-iBo">
                             <size key="itemSize" width="140" height="180"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="40" minY="10" maxX="40" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonCell" id="Z0U-U8-YlV" customClass="PokemonCollectionCell" customModule="Pokemon" customModuleProvider="target">
-                                <rect key="frame" x="40" y="10" width="140" height="171.5"/>
+                                <rect key="frame" x="40" y="60" width="140" height="171.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="s4I-Ds-9Cr">
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="171.5"/>
@@ -64,6 +64,23 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewHeader" id="75t-1t-jhi" customClass="SearchCollectionReusableView" customModule="Pokemon" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" placeholder="Search here" id="7LE-6K-hQs">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="hb2-aC-CDq" id="Nfd-cB-vM5"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <connections>
+                                <outlet property="searchBar" destination="7LE-6K-hQs" id="9nz-5h-Rpj"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="hb2-aC-CDq" id="M4z-o2-7gf"/>
                             <outlet property="delegate" destination="hb2-aC-CDq" id="fwT-OJ-9mp"/>

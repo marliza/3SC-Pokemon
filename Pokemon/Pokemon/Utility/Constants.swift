@@ -11,5 +11,6 @@ struct K{
     static let navTitle = "Pokemon"
     static let pokemonCellIdentifier = "PokemonCell"
     static let statsViewSegue = "StatsViewSegue"
+    static let collectionViewHeader = "CollectionViewHeader"
 }
 

@@ -31,6 +31,7 @@ class StatsViewController: UIViewController {
         dataCardView.layer.cornerRadius = 15.0
         dataCardView.layer.masksToBounds = true
 
+        // populate data fetched from api in view 
        setStatsData()
 
     }

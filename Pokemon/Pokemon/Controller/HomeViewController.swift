@@ -15,6 +15,7 @@ class HomeViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = K.navTitle
+        
         fetchPokemonList()
     }
     
@@ -60,6 +61,29 @@ extension HomeViewController{
         pokemonImage = cell.image
         performSegue(withIdentifier: K.statsViewSegue, sender: self)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let searchView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: K.collectionViewHeader, for: indexPath)
+            
+        return searchView
+    }
+}
+
+//MARK: - SearchBarDelegate
+extension HomeViewController: UISearchBarDelegate{
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text?.lowercased(){
+            searchPokemon(with: searchText)
+        }
+    }
+   
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0{
+            fetchPokemonList()
+
+        }
+    }
 }
 
 //MARK: - PokeAPIService 
@@ -75,6 +99,24 @@ extension HomeViewController{
           
             if let pokeStats = pokeStats{
                 self.pokemonStatsArray = pokeStats
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    // search pokemon with name or id
+    func searchPokemon(with parameter: String){
+        PokeAPIService.shared.requestFetchPokemon(with: parameter) { (pokeStats, error) in
+            if let error = error{
+                print("error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let poke = pokeStats{
+                var newPokeList = [PokemonStats]()
+                newPokeList.append(poke)
+                
+                self.pokemonStatsArray = newPokeList
                 self.collectionView.reloadData()
             }
         }
