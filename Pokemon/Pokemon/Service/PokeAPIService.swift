@@ -94,7 +94,8 @@ struct PokeAPIService {
             case .success(let value):
                 completion(value)
             case .failure:
-                completion(nil)
+                let defaultImage = UIImage(named: "pokeball")
+                completion(defaultImage)
             }
         }
         
